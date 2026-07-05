@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AdForge AI — Generate high-converting advertisement copy for Google, Instagram, and Facebook using generative AI." />
+  <title>AdForge AI — Harnessing Generative AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="nav">
+  <a class="nav-brand" href="#">
+    <div class="nav-brand-icon">⚡</div>
+    AdForge <span style="color:var(--violet-light)">AI</span>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link active" data-panel="panel-generate">Ad Generator</button>
+    <button class="nav-link" data-panel="panel-refine">Refine</button>
+    <button class="nav-link" data-panel="panel-tips">Performance Tips</button>
+    <a class="nav-link" href="/how-it-works">How It Works</a>
+    <a class="nav-link" href="/about">About</a>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span></span> Powered by Qwen3-32B on Groq
+  </div>
+  <h1>Ads that <span class="grad">convert</span>,<br>generated in seconds.</h1>
+  <p class="hero-sub">
+    AdForge AI writes platform-optimised, psychology-backed advertising copy
+    for Google, Instagram, and Facebook — tailored to your product, audience, and tone.
+  </p>
+  <div class="hero-badges">
+    <span class="badge">🎯 Google Ads</span>
+    <span class="badge">📸 Instagram</span>
+    <span class="badge">👥 Facebook</span>
+    <span class="badge">✍️ 16 Tones</span>
+    <span class="badge">🔁 Refinement Engine</span>
+    <span class="badge">📊 Performance Tips</span>
+  </div>
+</section>
+
+<div class="main-container">
+
+  <!-- ── Stats row ────────────────────────────────────────── -->
+  <div class="stats-row">
+    <div class="stat"><div class="stat-number">15+</div><div class="stat-label">Headlines per Campaign</div></div>
+    <div class="stat"><div class="stat-number">3</div><div class="stat-label">Platforms Supported</div></div>
+    <div class="stat"><div class="stat-number">16</div><div class="stat-label">Marketing Tones</div></div>
+    <div class="stat"><div class="stat-number">10+</div><div class="stat-label">Psychology Frameworks</div></div>
+  </div>
+
+  <!-- ── Mode tabs ────────────────────────────────────────── -->
+  <div id="app-anchor"></div>
+  <div class="tabs">
+    <button class="tab-btn active" data-panel="panel-generate">⚡ Ad Generator</button>
+    <button class="tab-btn" data-panel="panel-refine">✨ Refine Ad</button>
+    <button class="tab-btn" data-panel="panel-tips">📊 Performance Tips</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PANEL 1 — Ad Generator
+  ══════════════════════════════════════════════════════ -->
+  <div class="panel active" id="panel-generate">
+    <div class="card">
+
+      <div id="ad-alert" class="alert"></div>
+
+      <form id="ad-form" novalidate>
+
+        <!-- Product Details -->
+        <div class="section-title">Product Details</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="product_name">Product / Brand Name *</label>
+            <input type="text" id="product_name" name="product_name" placeholder="e.g. NovaBrew Coffee" required />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" id="category" name="category" placeholder="e.g. Specialty Coffee" />
+          </div>
+          <div class="form-group full">
+            <label for="description">Product Description *</label>
+            <textarea id="description" name="description" placeholder="Describe your product, what it does, and why customers love it…" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="usp">Unique Selling Proposition *</label>
+            <input type="text" id="usp" name="usp" placeholder="e.g. Single-origin, zero-plastic packaging" required />
+          </div>
+          <div class="form-group">
+            <label for="price">Price / Price Range</label>
+            <input type="text" id="price" name="price" placeholder="e.g. $24.99 / month" />
+          </div>
+          <div class="form-group">
+            <label for="offer">Offer / Discount</label>
+            <input type="text" id="offer" name="offer" placeholder="e.g. 30% off first order" />
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- Audience & Campaign -->
+        <div class="section-title">Audience &amp; Campaign</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="target_audience">Target Audience *</label>
+            <input type="text" id="target_audience" name="target_audience" placeholder="e.g. Remote workers aged 25-40" required />
+          </div>
+          <div class="form-group">
+            <label for="industry">Industry *</label>
+            <input type="text" id="industry" name="industry" placeholder="e.g. Food & Beverage" required />
+          </div>
+          <div class="form-group">
+            <label for="campaign_goal">Campaign Goal *</label>
+            <select id="campaign_goal" name="campaign_goal" required>
+              <option value="" disabled selected>Select a goal…</option>
+              <option value="Brand Awareness">Brand Awareness</option>
+              <option value="Lead Generation">Lead Generation</option>
+              <option value="Sales / Conversions">Sales / Conversions</option>
+              <option value="App Installs">App Installs</option>
+              <option value="Website Traffic">Website Traffic</option>
+              <option value="Engagement">Engagement</option>
+              <option value="Product Launch">Product Launch</option>
+              <option value="Retargeting">Retargeting</option>
+              <option value="Event Promotion">Event Promotion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="launch_type">Launch Type</label>
+            <select id="launch_type" name="launch_type">
+              <option value="">General Campaign</option>
+              <option value="New Product Launch">New Product Launch</option>
+              <option value="Seasonal Sale">Seasonal Sale</option>
+              <option value="Flash Sale">Flash Sale</option>
+              <option value="Relaunch">Relaunch</option>
+              <option value="Beta / Waitlist">Beta / Waitlist</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="brand_personality">Brand Personality</label>
+            <input type="text" id="brand_personality" name="brand_personality" placeholder="e.g. Warm, adventurous, premium" />
+          </div>
+          <div class="form-group">
+            <label for="competitor">Competitor (optional)</label>
+            <input type="text" id="competitor" name="competitor" placeholder="e.g. Starbucks" />
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- Copy Settings -->
+        <div class="section-title">Copy Settings</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="tone">Marketing Tone *</label>
+            <select id="tone" name="tone" required>
+              <option value="Professional">Professional</option>
+              <option value="Playful">Playful</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Minimal">Minimal</option>
+              <option value="Emotional">Emotional</option>
+              <option value="Bold">Bold</option>
+              <option value="Confident">Confident</option>
+              <option value="Friendly">Friendly</option>
+              <option value="Urgent">Urgent</option>
+              <option value="Persuasive">Persuasive</option>
+              <option value="Inspirational">Inspirational</option>
+              <option value="Casual">Casual</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Youthful">Youthful</option>
+              <option value="Creative">Creative</option>
+              <option value="Premium">Premium</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cta">Call to Action</label>
+            <input type="text" id="cta" name="cta" placeholder="e.g. Shop Now, Get Started Free" />
+          </div>
+          <div class="form-group">
+            <label for="keywords">Keywords (comma-separated)</label>
+            <input type="text" id="keywords" name="keywords" placeholder="e.g. organic, sustainable, premium" />
+          </div>
+          <div class="form-group full">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" placeholder="Any special instructions, restrictions, or ideas for the AI…" style="min-height:70px"></textarea>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- Platform Selection -->
+        <div class="section-title">Select Platforms</div>
+        <div class="platform-group" id="ad-platforms">
+          <label class="platform-check checked">
+            <input type="checkbox" name="platform_google" value="google" checked />
+            <span class="plat-icon">🔍</span> Google Ads
+          </label>
+          <label class="platform-check checked">
+            <input type="checkbox" name="platform_instagram" value="instagram" checked />
+            <span class="plat-icon">📸</span> Instagram Ads
+          </label>
+          <label class="platform-check checked">
+            <input type="checkbox" name="platform_facebook" value="facebook" checked />
+            <span class="plat-icon">👥</span> Facebook Ads
+          </label>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" id="ad-submit" class="btn btn-primary">
+            ⚡ Generate Advertisements
+          </button>
+          <button type="reset" class="btn btn-secondary">Clear Form</button>
+        </div>
+
+      </form><!-- /ad-form -->
+
+      <!-- Loader -->
+      <div class="loader-wrap" id="ad-loader">
+        <div class="spinner"></div>
+        <div class="loader-text" id="ad-loader-text">Analysing your campaign brief…</div>
+      </div>
+
+    </div><!-- /card -->
+
+    <!-- Output -->
+    <div class="output-area" id="ad-output" style="margin-top:1.5rem">
+      <div class="card">
+        <div class="output-header">
+          <div class="output-title">📢 Generated Advertisements</div>
+          <div class="output-actions">
+            <button class="btn btn-secondary btn-sm" onclick="copyOutput('ad-output')">📋 Copy</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadOutput('ad-output','adforge-ads.txt')">⬇️ Download TXT</button>
+          </div>
+        </div>
+        <div class="output-content"></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-generate -->
+
+
+  <!-- ══════════════════════════════════════════════════════
+       PANEL 2 — Refinement Engine
+  ══════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-refine">
+    <div class="card">
+
+      <div id="refine-alert" class="alert"></div>
+
+      <div class="section-title">Advertisement Refinement Engine</div>
+      <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:1.5rem;line-height:1.7">
+        Paste an existing advertisement, describe how you'd like it improved, and AdForge AI will
+        deliver a refined version with a full breakdown of changes and a conversion prediction.
+      </p>
+
+      <form id="refine-form" novalidate>
+        <div class="refine-grid">
+          <div class="form-group">
+            <label for="original_ad">Original Advertisement *</label>
+            <textarea id="original_ad" name="original_ad" style="min-height:220px"
+              placeholder="Paste your existing ad copy here…" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="feedback">Improvement Instructions *</label>
+            <textarea id="feedback" name="feedback" style="min-height:220px"
+              placeholder="e.g. Make it shorter and more urgent. Target teenagers. Add a strong CTA. Use emotional storytelling. Reduce emojis. Make it more professional." required></textarea>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" id="refine-submit" class="btn btn-primary">
+            ✨ Refine Advertisement
+          </button>
+          <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+      </form>
+
+      <!-- Loader -->
+      <div class="loader-wrap" id="refine-loader">
+        <div class="spinner"></div>
+        <div class="loader-text" id="refine-loader-text">Refining your advertisement…</div>
+      </div>
+
+    </div><!-- /card -->
+
+    <!-- Output -->
+    <div class="output-area" id="refine-output" style="margin-top:1.5rem">
+      <div class="card">
+        <div class="output-header">
+          <div class="output-title">✨ Refined Advertisement</div>
+          <div class="output-actions">
+            <button class="btn btn-secondary btn-sm" onclick="copyOutput('refine-output')">📋 Copy</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadOutput('refine-output','adforge-refined.txt')">⬇️ Download TXT</button>
+          </div>
+        </div>
+        <div class="output-content"></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-refine -->
+
+
+  <!-- ══════════════════════════════════════════════════════
+       PANEL 3 — Performance Tips
+  ══════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-tips">
+    <div class="card">
+
+      <div id="tips-alert" class="alert"></div>
+
+      <div class="section-title">Performance Intelligence Generator</div>
+      <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:1.5rem;line-height:1.7">
+        Get A/B testing ideas, CTA improvements, SEO tips, best posting times,
+        and audience recommendations tailored to your campaign.
+      </p>
+
+      <form id="tips-form" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="tips_product_name">Product / Brand Name *</label>
+            <input type="text" id="tips_product_name" name="product_name" placeholder="e.g. NovaBrew Coffee" required />
+          </div>
+          <div class="form-group">
+            <label for="tips_industry">Industry *</label>
+            <input type="text" id="tips_industry" name="industry" placeholder="e.g. Food & Beverage" required />
+          </div>
+          <div class="form-group">
+            <label for="tips_audience">Target Audience *</label>
+            <input type="text" id="tips_audience" name="target_audience" placeholder="e.g. Remote workers aged 25-40" required />
+          </div>
+          <div class="form-group">
+            <label for="tips_goal">Campaign Goal *</label>
+            <select id="tips_goal" name="campaign_goal" required>
+              <option value="" disabled selected>Select a goal…</option>
+              <option value="Brand Awareness">Brand Awareness</option>
+              <option value="Lead Generation">Lead Generation</option>
+              <option value="Sales / Conversions">Sales / Conversions</option>
+              <option value="App Installs">App Installs</option>
+              <option value="Website Traffic">Website Traffic</option>
+              <option value="Engagement">Engagement</option>
+              <option value="Product Launch">Product Launch</option>
+              <option value="Retargeting">Retargeting</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tips_usp">USP *</label>
+            <input type="text" id="tips_usp" name="usp" placeholder="e.g. Single-origin, zero-plastic" required />
+          </div>
+          <div class="form-group">
+            <label for="tips_tone">Tone *</label>
+            <select id="tips_tone" name="tone">
+              <option value="Professional">Professional</option>
+              <option value="Playful">Playful</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Emotional">Emotional</option>
+              <option value="Bold">Bold</option>
+              <option value="Urgent">Urgent</option>
+              <option value="Friendly">Friendly</option>
+              <option value="Youthful">Youthful</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="section-title">Platforms to Optimise</div>
+        <div class="platform-group" id="tips-platforms">
+          <label class="platform-check checked">
+            <input type="checkbox" value="google" checked />
+            <span class="plat-icon">🔍</span> Google Ads
+          </label>
+          <label class="platform-check checked">
+            <input type="checkbox" value="instagram" checked />
+            <span class="plat-icon">📸</span> Instagram
+          </label>
+          <label class="platform-check checked">
+            <input type="checkbox" value="facebook" checked />
+            <span class="plat-icon">👥</span> Facebook
+          </label>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" id="tips-submit" class="btn btn-primary">
+            📊 Generate Performance Tips
+          </button>
+          <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+      </form>
+
+      <!-- Loader -->
+      <div class="loader-wrap" id="tips-loader">
+        <div class="spinner"></div>
+        <div class="loader-text" id="tips-loader-text">Generating performance intelligence…</div>
+      </div>
+
+    </div><!-- /card -->
+
+    <!-- Output -->
+    <div class="output-area" id="tips-output" style="margin-top:1.5rem">
+      <div class="card">
+        <div class="output-header">
+          <div class="output-title">📊 Performance Intelligence Report</div>
+          <div class="output-actions">
+            <button class="btn btn-secondary btn-sm" onclick="copyOutput('tips-output')">📋 Copy</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadOutput('tips-output','adforge-tips.txt')">⬇️ Download TXT</button>
+          </div>
+        </div>
+        <div class="output-content"></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-tips -->
+
+</div><!-- /main-container -->
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer>
+  <p>AdForge AI &copy; 2025 &mdash; Powered by Qwen3-32B via Groq &bull; Built for marketing teams who move fast.</p>
+</footer>
+
+<!-- ── Copy toast ───────────────────────────────────────────── -->
+<div class="copied-toast" id="copied-toast"></div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

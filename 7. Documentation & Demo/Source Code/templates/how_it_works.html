@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — AdForge AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .page-hero { padding:130px 2rem 60px; text-align:center; position:relative; }
+    .page-hero::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 50% 0%, rgba(56,189,248,.2) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .page-hero h1 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:800; letter-spacing:-.03em; margin-bottom:1rem; }
+    .page-hero p  { color:var(--text-muted); max-width:560px; margin:0 auto; font-size:1rem; }
+    .back-link    { display:inline-flex; align-items:center; gap:.4rem; color:var(--violet-light); font-size:.875rem; font-weight:500; text-decoration:none; margin-bottom:1.5rem; }
+    .back-link:hover { color:var(--text); }
+
+    /* Steps */
+    .steps        { display:flex; flex-direction:column; gap:0; margin:2rem 0; position:relative; }
+    .steps::before {
+      content:''; position:absolute; left:28px; top:0; bottom:0; width:2px;
+      background:linear-gradient(to bottom, var(--violet), var(--accent));
+    }
+    .step         { display:flex; gap:1.5rem; align-items:flex-start; padding:0 0 2.5rem 0; }
+    .step-num     { min-width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--accent)); display:flex; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:1.1rem; font-weight:800; color:#fff; position:relative; z-index:1; flex-shrink:0; }
+    .step-body    { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; flex:1; }
+    .step-body h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+    .step-body p  { font-size:.875rem; color:var(--text-muted); line-height:1.75; margin:0; }
+    .step-body .tag { display:inline-block; margin-top:.75rem; padding:.25rem .75rem; border-radius:100px; background:rgba(124,58,237,.12); border:1px solid var(--border); font-size:.75rem; font-weight:600; color:var(--violet-light); }
+
+    /* Architecture */
+    .arch-grid    { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; margin:1.5rem 0; }
+    .arch-card    { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.4rem; }
+    .arch-card .label { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--violet-light); margin-bottom:.6rem; }
+    .arch-card h4 { font-family:'Plus Jakarta Sans',sans-serif; font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:.4rem; }
+    .arch-card p  { font-size:.8rem; color:var(--text-muted); line-height:1.65; }
+
+    /* Flow diagram */
+    .flow         { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; margin:1.5rem 0; }
+    .flow-box     { background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:.6rem 1.1rem; font-size:.8rem; font-weight:600; color:var(--text); white-space:nowrap; }
+    .flow-arrow   { color:var(--violet-light); font-size:1.2rem; }
+
+    /* Psychology */
+    .psych-grid   { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0; }
+    .psych-tag    { padding:.35rem .9rem; border-radius:100px; background:var(--surface); border:1px solid var(--border); font-size:.78rem; font-weight:500; color:var(--text-muted); }
+
+    /* Ngrok section */
+    .ngrok-steps  { display:flex; flex-direction:column; gap:.75rem; margin-top:1.25rem; }
+    .ngrok-step   { display:flex; gap:1rem; align-items:flex-start; }
+    .ngrok-num    { min-width:28px; height:28px; border-radius:50%; background:var(--violet); display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700; color:#fff; flex-shrink:0; margin-top:2px; }
+    .ngrok-step p { font-size:.875rem; color:var(--text-muted); line-height:1.7; margin:0; }
+    .ngrok-step strong { color:var(--text); }
+    .code-block   { background:var(--surface-2); border:1px solid rgba(255,255,255,.07); border-radius:10px; padding:1rem 1.25rem; font-family:monospace; font-size:.82rem; color:#93C5FD; margin:.5rem 0; overflow-x:auto; }
+
+    .section-block { margin:3rem 0; }
+    .section-block h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:1.25rem; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a class="nav-brand" href="/">
+    <div class="nav-brand-icon">⚡</div>
+    AdForge <span style="color:var(--violet-light)">AI</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="/">Ad Generator</a>
+    <a class="nav-link active" href="/how-it-works">How It Works</a>
+    <a class="nav-link" href="/about">About</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="page-hero">
+  <div class="hero-eyebrow"><span></span> Technical Walkthrough</div>
+  <h1>How <span class="grad">AdForge AI</span><br>Works</h1>
+  <p>A complete walkthrough of the application architecture, data flow, AI prompt engineering, and deployment process.</p>
+</section>
+
+<div class="main-container">
+  <a class="back-link" href="/">← Back to App</a>
+
+  <!-- User Journey Steps -->
+  <div class="section-block">
+    <h2>User Journey — Step by Step</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>User Fills the Campaign Brief</h3>
+          <p>The user enters campaign details into the Ad Generator form — product name, description, USP, target audience, industry, campaign goal, tone, keywords, CTA, platforms, and optional fields like competitor and discount. All fields are validated client-side before submission.</p>
+          <span class="tag">Frontend — index.html + script.js</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Form Data Sent to Flask Backend</h3>
+          <p>On submission, JavaScript sends an asynchronous POST request to <code style="color:var(--accent)">/api/generate</code> using the Fetch API with FormData. No page reload occurs. A loading spinner with cycling messages appears while the request is in progress.</p>
+          <span class="tag">JavaScript fetch() → Flask route</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Server-Side Validation &amp; Safety Check</h3>
+          <p>Flask validates all required fields and checks for missing platforms. Then a content safety filter scans the input for blocked terms related to illegal products, fraud, adult content, violence, and hate. If flagged, a 422 response is returned immediately without calling the AI.</p>
+          <span class="tag">app.py — validate_inputs() + is_unsafe_input()</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Input Sanitisation with Bleach</h3>
+          <p>Every single user input is passed through the <code style="color:var(--accent)">sanitize()</code> function which uses the Bleach library to strip all HTML tags (preventing XSS attacks) and enforces per-field character limits to prevent prompt injection attacks.</p>
+          <span class="tag">app.py — sanitize() using bleach.clean()</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Structured Prompt is Built</h3>
+          <p>The sanitised data is passed into <code style="color:var(--accent)">build_ad_prompt()</code> which constructs a highly structured marketing prompt. The prompt includes internal reasoning instructions using thinking tags, the full campaign brief, and precise output format requirements for each selected platform.</p>
+          <span class="tag">app.py — build_ad_prompt()</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Groq API Called with Qwen3-32B</h3>
+          <p>The prompt is sent to the Groq API using the <code style="color:var(--accent)">qwen/qwen3-32b</code> model with temperature 0.85 and max tokens 4096. The system message instructs the model to act as an expert advertising engine. Groq's hardware delivers responses in seconds.</p>
+          <span class="tag">app.py — call_groq() → Groq API</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <h3>Markdown Response Rendered in UI</h3>
+          <p>The AI returns structured Markdown. The frontend JavaScript parser converts it into formatted HTML with headings, bold text, lists, and horizontal rules — displayed in the output card below the form. Users can copy to clipboard or download as a .TXT file.</p>
+          <span class="tag">script.js — renderMarkdown() + showOutput()</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Data flow diagram -->
+  <div class="section-block">
+    <h2>Request Data Flow</h2>
+    <div class="card">
+      <div class="flow">
+        <div class="flow-box">👤 User Form</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">📡 fetch() POST</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">⚗️ Flask Route</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">🔍 Validate</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">🧹 Sanitize</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">📝 Build Prompt</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">⚡ Groq API</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">🤖 Qwen3-32B</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">📄 Markdown</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">🖥️ Rendered UI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Architecture -->
+  <div class="section-block">
+    <h2>Application Architecture</h2>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="label">Frontend</div>
+        <h4>index.html</h4>
+        <p>Single-page application with three panels — Ad Generator, Refine Ad, and Performance Tips. Tab switching, form rendering, and output display all happen without page reloads.</p>
+      </div>
+      <div class="arch-card">
+        <div class="label">Styles</div>
+        <h4>style.css</h4>
+        <p>Premium dark SaaS design using CSS custom properties. Deep navy background, electric violet accents, animated gradient card borders, and fully responsive layout.</p>
+      </div>
+      <div class="arch-card">
+        <div class="label">Controller</div>
+        <h4>script.js</h4>
+        <p>Handles all interactivity — tab switching, async API calls, inline markdown rendering, loading state management, clipboard copy, and TXT file download.</p>
+      </div>
+      <div class="arch-card">
+        <div class="label">Backend</div>
+        <h4>app.py</h4>
+        <p>Flask application with three API routes (/api/generate, /api/refine, /api/tips), prompt builders, safety filter, input sanitiser, and Groq API integration.</p>
+      </div>
+      <div class="arch-card">
+        <div class="label">AI Model</div>
+        <h4>Qwen3-32B</h4>
+        <p>32-billion parameter open-source language model served via Groq's LPU hardware for ultra-fast inference. Supports advanced internal reasoning via thinking tags.</p>
+      </div>
+      <div class="arch-card">
+        <div class="label">Security</div>
+        <h4>.env + Bleach</h4>
+        <p>API keys are stored in .env and never exposed to the client. Bleach sanitises all user inputs. Content safety filter blocks harmful requests before they reach the AI.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Psychology Frameworks -->
+  <div class="section-block">
+    <h2>Marketing Psychology Frameworks Applied</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1rem">The AI prompt instructs the model to reason through which frameworks best fit the campaign before writing. Only naturally fitting techniques are applied — never forced.</p>
+      <div class="psych-grid">
+        <span class="psych-tag">📈 AIDA (Attention, Interest, Desire, Action)</span>
+        <span class="psych-tag">🔥 PAS (Problem, Agitate, Solution)</span>
+        <span class="psych-tag">⭐ FAB (Features, Advantages, Benefits)</span>
+        <span class="psych-tag">🔄 BAB (Before, After, Bridge)</span>
+        <span class="psych-tag">📖 Storytelling</span>
+        <span class="psych-tag">⏰ Scarcity</span>
+        <span class="psych-tag">👥 Social Proof</span>
+        <span class="psych-tag">😰 Loss Aversion</span>
+        <span class="psych-tag">😮 FOMO</span>
+        <span class="psych-tag">❤️ Emotional Selling</span>
+        <span class="psych-tag">🏆 Authority</span>
+        <span class="psych-tag">🎁 Reciprocity</span>
+        <span class="psych-tag">🚨 Urgency</span>
+        <span class="psych-tag">🤔 Curiosity Gap</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local Deployment -->
+  <div class="section-block">
+    <h2>Local Deployment</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1.25rem">AdForge AI runs locally on your machine using Python and Flask. No cloud infrastructure required.</p>
+      <div class="ngrok-steps">
+        <div class="ngrok-step">
+          <div class="ngrok-num">1</div>
+          <p>Open the <strong>adforge</strong> folder in VS Code and open the terminal (Ctrl + `)</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">2</div>
+          <p>Activate the virtual environment: <strong>venv\Scripts\activate</strong> (Windows) or <strong>source venv/bin/activate</strong> (Mac/Linux)</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">3</div>
+          <p>Add your Groq API key to the <strong>.env</strong> file as <strong>GROQ_API_KEY=your_key_here</strong></p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">4</div>
+          <p>Run <strong>python app.py</strong> — the server starts at <strong>http://localhost:5000</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ngrok Public Deployment -->
+  <div class="section-block">
+    <h2>Public Deployment via Ngrok</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1.25rem">
+        Ngrok creates a secure public URL for your locally running Flask app — no hosting or server required.
+        Anyone in the world can access your app through the ngrok URL while your app is running.
+      </p>
+      <div class="ngrok-steps">
+        <div class="ngrok-step">
+          <div class="ngrok-num">1</div>
+          <p>Make sure AdForge AI is running locally at <strong>http://localhost:5000</strong> with <strong>python app.py</strong></p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">2</div>
+          <p>Install ngrok by running:</p>
+        </div>
+      </div>
+      <div class="code-block">pip install pyngrok</div>
+      <div class="ngrok-steps">
+        <div class="ngrok-step">
+          <div class="ngrok-num">3</div>
+          <p>Open a <strong>second terminal window</strong> (keep the first one running app.py) and run:</p>
+        </div>
+      </div>
+      <div class="code-block">python ngrok_start.py</div>
+      <div class="ngrok-steps">
+        <div class="ngrok-step">
+          <div class="ngrok-num">4</div>
+          <p>You will see a public URL like: <strong style="color:var(--accent)">https://abc123.ngrok-free.app</strong> — share this with anyone to access your app from any device or browser, anywhere in the world.</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">5</div>
+          <p>To stop ngrok, press <strong>Ctrl + C</strong> in the second terminal. The public URL will expire when you stop it.</p>
+        </div>
+      </div>
+      <p style="color:var(--text-muted);font-size:.8rem;margin-top:1.25rem;padding:.75rem 1rem;background:rgba(124,58,237,.08);border-radius:8px;border:1px solid var(--border)">
+        ⚠️ <strong style="color:var(--text)">Note:</strong> The ngrok free tier URL changes every time you restart it. For a permanent URL, sign up at ngrok.com and use your authtoken.
+      </p>
+    </div>
+  </div>
+
+  <!-- Testing -->
+  <div class="section-block">
+    <h2>Local Testing &amp; Verification</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1.25rem">AdForge AI includes an automated test suite that verifies every core function without needing a real API key.</p>
+      <div class="code-block">python test_app.py</div>
+      <div class="ngrok-steps" style="margin-top:1rem">
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>Safety filter correctly blocks harmful inputs</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>Bleach sanitiser strips HTML and enforces length limits</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>Prompt builder produces correct structured output</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>All Flask routes respond with correct HTTP status codes</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>Validation returns 400 for missing required fields</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>Unsafe inputs return 422 without reaching the AI</p>
+        </div>
+        <div class="ngrok-step">
+          <div class="ngrok-num">✅</div>
+          <p>About and How It Works pages render correctly</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>AdForge AI &copy; 2025 &mdash; Powered by Qwen3-32B via Groq &bull; Built for marketing teams who move fast.</p>
+</footer>
+
+</body>
+</html>

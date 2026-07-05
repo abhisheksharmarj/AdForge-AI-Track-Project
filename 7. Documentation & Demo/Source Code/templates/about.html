@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — AdForge AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .page-hero { padding: 130px 2rem 60px; text-align: center; position: relative; }
+    .page-hero::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,58,237,0.28) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .page-hero h1 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:1rem; }
+    .page-hero p  { color:var(--text-muted); max-width:560px; margin:0 auto; font-size:1rem; }
+    .about-grid   { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.25rem; margin:2.5rem 0; }
+    .about-card   { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.75rem; transition:border-color .22s; }
+    .about-card:hover { border-color:rgba(124,58,237,.55); }
+    .about-card-icon { font-size:2rem; margin-bottom:1rem; }
+    .about-card h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:700; margin-bottom:.6rem; color:var(--text); }
+    .about-card p  { font-size:.875rem; color:var(--text-muted); line-height:1.7; }
+    .tech-row      { display:flex; flex-wrap:wrap; gap:.75rem; margin:1.5rem 0; }
+    .tech-pill     { padding:.4rem 1rem; border-radius:100px; background:rgba(124,58,237,.12); border:1px solid var(--border); font-size:.8rem; font-weight:600; color:var(--violet-light); }
+    .section-block { margin:3rem 0; }
+    .section-block h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:1.25rem; }
+    .team-note     { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; text-align:center; margin-top:3rem; }
+    .team-note p   { color:var(--text-muted); font-size:.9rem; line-height:1.8; }
+    .back-link     { display:inline-flex; align-items:center; gap:.4rem; color:var(--violet-light); font-size:.875rem; font-weight:500; text-decoration:none; margin-bottom:1.5rem; }
+    .back-link:hover { color:var(--text); }
+    .safety-list   { list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:.6rem; margin-top:1rem; }
+    .safety-list li { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:.55rem 1rem; font-size:.82rem; color:var(--text-muted); display:flex; align-items:center; gap:.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a class="nav-brand" href="/">
+    <div class="nav-brand-icon">⚡</div>
+    AdForge <span style="color:var(--violet-light)">AI</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="/">Ad Generator</a>
+    <a class="nav-link" href="/how-it-works">How It Works</a>
+    <a class="nav-link active" href="/about">About</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="page-hero">
+  <div class="hero-eyebrow"><span></span> About AdForge AI</div>
+  <h1>Built for Marketers.<br><span class="grad">Powered by Generative AI.</span></h1>
+  <p>AdForge AI is an open-source educational project that demonstrates how large language models can automate and enhance professional marketing workflows.</p>
+</section>
+
+<div class="main-container">
+  <a class="back-link" href="/">← Back to App</a>
+
+  <!-- What is it -->
+  <div class="section-block">
+    <h2>What is AdForge AI?</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);line-height:1.9;font-size:.92rem">
+        AdForge AI is a Generative AI-powered Advertisement Copy Generation Platform designed to help
+        marketers, startups, creators, and business owners produce high-converting, platform-specific
+        advertisement copy within seconds. Instead of spending hours crafting separate ad copies for
+        Google, Instagram, and Facebook, AdForge AI automates the entire process using the
+        <strong style="color:var(--text)">Qwen3-32B</strong> large language model — one of the most
+        capable open-source models available — served through the
+        <strong style="color:var(--text)">Groq API</strong> for ultra-fast inference.
+        <br><br>
+        The application applies proven marketing psychology frameworks including AIDA, PAS, FAB, BAB,
+        Scarcity, Social Proof, Loss Aversion, FOMO, and Emotional Selling to produce copy that is not
+        just grammatically correct — but genuinely persuasive and conversion-focused.
+      </p>
+    </div>
+  </div>
+
+  <!-- Core Modules -->
+  <div class="section-block">
+    <h2>Core Modules</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-card-icon">⚡</div>
+        <h3>Ad Generator</h3>
+        <p>Generates Google Ads (15 headlines + 4 descriptions), Instagram captions (3 variations with hashtags), and Facebook primary text (3 variations) simultaneously from a single campaign brief.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">✨</div>
+        <h3>Refinement Engine</h3>
+        <p>Accepts existing advertisement copy and user feedback. Returns an improved version, a full list of changes made with reasoning, an improvement score out of 10, and a conversion prediction.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">📊</div>
+        <h3>Performance Tips</h3>
+        <p>Generates a complete Performance Intelligence Report covering A/B testing ideas, CTA improvements, SEO suggestions, conversion optimisation tips, best posting times, and audience segments.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🎯</div>
+        <h3>Slogan Generator</h3>
+        <p>Built into the Ad Generator — produces 5 unique, memorable, and brandable marketing slogans tailored to your product, USP, and target audience. Each slogan is kept under 10 words.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🎨</div>
+        <h3>16 Marketing Tones</h3>
+        <p>Professional, Playful, Luxury, Minimal, Emotional, Bold, Confident, Friendly, Urgent, Persuasive, Inspirational, Casual, Corporate, Youthful, Creative, and Premium tone settings.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🔒</div>
+        <h3>Content Safety Filter</h3>
+        <p>Every request is screened for illegal, harmful, adult, or fraudulent content before reaching the AI. Inputs are sanitised with Bleach to prevent XSS attacks and prompt injection.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="section-block">
+    <h2>Technology Stack</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1.25rem">Every component was chosen for performance, security, and maintainability.</p>
+      <div class="tech-row">
+        <span class="tech-pill">🐍 Python 3.8+</span>
+        <span class="tech-pill">⚗️ Flask 3.0.3</span>
+        <span class="tech-pill">🤖 Qwen3-32B</span>
+        <span class="tech-pill">⚡ Groq API</span>
+        <span class="tech-pill">🧹 Bleach</span>
+        <span class="tech-pill">🔐 python-dotenv</span>
+        <span class="tech-pill">🌐 HTML5</span>
+        <span class="tech-pill">🎨 CSS3</span>
+        <span class="tech-pill">⚙️ Vanilla JavaScript</span>
+        <span class="tech-pill">🔠 Plus Jakarta Sans</span>
+        <span class="tech-pill">🔠 Inter</span>
+        <span class="tech-pill">🌍 Ngrok</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Safety -->
+  <div class="section-block">
+    <h2>Safety &amp; Security</h2>
+    <div class="card">
+      <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1rem">AdForge AI is built with security-first principles at every layer.</p>
+      <ul class="safety-list">
+        <li>✅ XSS prevention via Bleach</li>
+        <li>✅ API key stored in .env only</li>
+        <li>✅ Server-side input validation</li>
+        <li>✅ Input length capping</li>
+        <li>✅ Content safety keyword filter</li>
+        <li>✅ HTTP 400 / 422 / 502 responses</li>
+        <li>✅ Prompt injection protection</li>
+        <li>✅ No user data stored</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Purpose -->
+  <div class="team-note">
+    <div style="font-size:2rem;margin-bottom:1rem">🎓</div>
+    <p>
+      AdForge AI was developed as an educational and portfolio project to demonstrate the practical application
+      of Generative AI in digital marketing automation. It showcases full-stack web development using Python Flask,
+      prompt engineering with advanced marketing psychology, secure API integration, and modern SaaS UI design.
+      <br><br>
+      <strong style="color:var(--text)">Model:</strong> qwen/qwen3-32b &nbsp;|&nbsp;
+      <strong style="color:var(--text)">Provider:</strong> Groq API &nbsp;|&nbsp;
+      <strong style="color:var(--text)">License:</strong> Educational / Portfolio Use
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <p>AdForge AI &copy; 2025 &mdash; Powered by Qwen3-32B via Groq &bull; Built for marketing teams who move fast.</p>
+</footer>
+
+</body>
+</html>

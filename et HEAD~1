@@ -1,0 +1,21 @@
+[33mcommit 62fd9a0ec787ac5ea568654e43cfb4b709d81d16[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Anish Singh <anishbth6711@gmail.com>
+Date:   Mon Jul 6 01:13:50 2026 +0530
+
+    Add AdForge source code
+
+ 7. Documentation & Demo/Source Code/.env           |  11 [32m+[m
+ 7. Documentation & Demo/Source Code/.env.example   |  11 [32m+[m
+ 7. Documentation & Demo/Source Code/.gitignore     | Bin [31m0[m -> [32m70[m bytes
+ .../Source Code/__pycache__/app.cpython-313.pyc    | Bin [31m0[m -> [32m18672[m bytes
+ 7. Documentation & Demo/Source Code/adforge        |   1 [31m-[m
+ 7. Documentation & Demo/Source Code/app.py         | 406 [32m+++++++++++++++++[m
+ 7. Documentation & Demo/Source Code/ngrok_start.py |  97 [32m++++[m
+ .../Source Code/requirements.txt                   |   5 [32m+[m
+ .../Source Code/static/css/style.css               | 497 [32m+++++++++++++++++++++[m
+ .../Source Code/static/js/script.js                | 252 [32m+++++++++++[m
+ .../Source Code/templates/about.html               | 178 [32m++++++++[m
+ .../Source Code/templates/how_it_works.html        | 360 [32m+++++++++++++++[m
+ .../Source Code/templates/index.html               | 430 [32m++++++++++++++++++[m
+ 7. Documentation & Demo/Source Code/test_app.py    | 391 [32m++++++++++++++++[m
+ 14 files changed, 2638 insertions(+), 1 deletion(-)
